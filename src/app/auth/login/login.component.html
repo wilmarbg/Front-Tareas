@@ -1,0 +1,146 @@
+<app-loader [show]="loading"></app-loader>
+<div class="container-fluid p-0">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div class="login-card login-dark">
+        <div>
+          <div>
+            <a class="logo" [routerLink]="['/dashboard/default']">
+              <img
+                class="img-fluid for-light"
+                src="assets/images/logo/atom.png"
+                alt="looginpage"
+              />
+            </a>
+          </div>
+          <div class="login-main">
+            <form class="theme-form" [formGroup]="loginForm">
+              <h2 class="text-center">Iniciar Sesion</h2>
+              @if(errorMessage){
+                <div class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+                }
+              <div class="form-group">
+                <label class="col-form-label">Correo electrónico</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  required=""
+                  placeholder="app@yourmail.com"
+                  formControlName="email"
+                />
+                @if(loginForm.controls['email'].touched &&
+                loginForm.controls['email'].errors?.['required']){
+                <div class="text text-danger mt-1">Correo es requerido</div>
+                } @if(loginForm.controls['email'].touched &&
+                loginForm.controls['email'].errors?.['email']){
+                <div class="text text-danger mt-1">Correo invalido</div>
+                }
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Contraseña</label>
+                <div class="form-input position-relative">
+                  <input
+                    class="form-control"
+                    [type]="show ? 'text' : 'password'"
+                    type="password"
+                    name="login[password]"
+                    required=""
+                    placeholder="*********"
+                    formControlName="password"
+                  />
+                  @if(!show){
+                  <div class="show-hide" (click)="showPassword()">
+                    <span class="show"> </span>
+                  </div>
+                  }@else{
+                  <div class="show-hide" (click)="showPassword()">
+                    <span class="Hide"></span>
+                  </div>
+                  } @if(loginForm.controls['password'].touched &&
+                  loginForm.controls['password'].errors?.['required']){
+                  <div class="text text-danger mt-1">
+                    Contraseña es requerida
+                  </div>
+                  }
+                </div>
+              </div>
+              <div class="text-end mt-3">
+                <button
+                  class="btn btn-primary btn-block w-100 text-white"
+                  [disabled]="!loginForm.valid"
+                  (click)="login()"
+                >
+                  Ingresar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if(showUser){
+  <app-modal-generic textTitle="Usuario no existe, es necesario registrarse" [showFooter]="false">
+      <ng-container buttonclose>
+          <button type="button" class="btn-close py-0"
+              (click)="this.close()">
+          </button>
+      </ng-container>
+      <ng-container body>
+
+          <div class="row">
+
+              <div class="row">
+                  <div class="col-10 my-1">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" id="nombre" class="form-control"
+                      [(ngModel)]="dataUser.username">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-10 my-3">
+                      <label for="email">Email</label>
+                      <input type="text" id="email"
+                          class="form-control" [(ngModel)]="dataUser.email">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-10 my-3">
+                      <label for="password">Contraseña</label>
+                      <input type="text" id="password"
+                          class="form-control" [(ngModel)]="dataUser.password">
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-10 my-3">
+                      <label for="codigo">Codigo</label>
+                      <input type="text" id="codigo"
+                          class="form-control" [(ngModel)]="dataUser.codigo">
+                  </div>
+              </div>
+
+          </div>
+
+          <br>
+          <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-success btn-pill mx-2"
+                  (click)="this.save()">
+                  Aceptar
+              </button>
+              <button type="button" class="btn btn-warning btn-pill mx-2"
+                  (click)="this.close()">
+                  Cerrar
+              </button>
+          </div>
+
+      </ng-container>
+
+  </app-modal-generic>
+  }

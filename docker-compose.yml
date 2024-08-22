@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web-admin:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+      - './:/etc/nginx/conf.d'
+      - ./node_modules:/app/node_modules
+      - ./src:/app/src
+    ports:
+      - "8081:80"
+    restart: always

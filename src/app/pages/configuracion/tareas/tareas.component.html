@@ -1,0 +1,157 @@
+<app-loader [show]="loading"></app-loader>
+<div class="card">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-12 ">
+                @if(datosTareas.length){
+                <table
+                class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Descripción</th>
+                            <th>Fecha de Creación</th>
+                            <th>Estado Tarea</th>
+                            <th></th>
+                            <th class="action-column"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (dg of datosTareas; track dg.id; let idx = $index) {
+                        <tr>
+                            <td>{{dg.titulo}}</td>
+                            <td>{{dg.descripcion}}</td>
+                            <td>{{dg.fechaCreacion}}</td>
+                            <!-- <td>{{dg.completado}}</td> -->
+                            <td>
+                                @if (dg.completado) {
+                                    Completada
+                                } @else {
+                                    Pendiente
+                                }
+                            </td>
+                            <td>
+                                <input type="checkbox" [checked]="dg.completado" (change)="updateCompletado(dg.id, $event)">
+                            </td>
+
+                            <td class="action-column">
+                                <div class="button-container">
+                                    <button class="btn btn-sm btn-success" (click)="showUpdateTarea = true" title="Editar">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" (click)="updateEstado(dg.id)" title="Eliminar">
+                                        <i class="fa fa-cancel"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-2 col-lg-2">
+            <br>
+            <button class="btn btn-sm btn-success m-2" (click)="showTarea= true"
+                title="Crear Tarea"><i
+                    class="fa fa-plus"></i></button>
+        </div>
+
+    </div>
+</div>
+
+@if(showTarea){
+    <app-modal-generic textTitle="Registrar Tarea" [showFooter]="false">
+        <ng-container buttonclose>
+            <button type="button" class="btn-close py-0"
+                (click)="close()">
+            </button>
+        </ng-container>
+        <ng-container body>
+  
+            <div class="row">
+  
+                <div class="row">
+                    <div class="col-10 my-1">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" id="titulo" class="form-control"
+                        [(ngModel)]="dataSave.titulo">
+                    </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-10 my-3">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" id="descripcion"
+                            class="form-control" [(ngModel)]="dataSave.descripcion">
+                    </div>
+                </div>
+  
+            </div>
+  
+            <br>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-success btn-pill mx-2"
+                    (click)="this.save()">
+                    Aceptar
+                </button>
+                <button type="button" class="btn btn-warning btn-pill mx-2"
+                    (click)="this.close()">
+                    Cerrar
+                </button>
+            </div>
+  
+        </ng-container>
+  
+    </app-modal-generic>
+    }
+
+    @if(showUpdateTarea){
+        <app-modal-generic textTitle="Editar Tarea" [showFooter]="false">
+            <ng-container buttonclose>
+                <button type="button" class="btn-close py-0"
+                    (click)="close()">
+                </button>
+            </ng-container>
+            <ng-container body>
+      
+                <div class="row">
+      
+                    <div class="row">
+                        <div class="col-10 my-1">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" id="titulo" class="form-control"
+                            [(ngModel)]="dataUpdate.titulo">
+                        </div>
+                    </div>
+      
+                    <div class="row">
+                        <div class="col-10 my-3">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion"
+                                class="form-control" [(ngModel)]="dataUpdate.descripcion">
+                        </div>
+                    </div>
+      
+                </div>
+      
+                <br>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-success btn-pill mx-2"
+                        (click)="this.update()">
+                        Aceptar
+                    </button>
+                    <button type="button" class="btn btn-warning btn-pill mx-2"
+                        (click)="this.close()">
+                        Cerrar
+                    </button>
+                </div>
+      
+            </ng-container>
+      
+        </app-modal-generic>
+        }

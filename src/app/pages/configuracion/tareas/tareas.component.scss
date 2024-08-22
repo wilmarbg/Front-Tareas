@@ -1,0 +1,46 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .row-border tr {
+    border-top: 1px solid #ddd;
+  }
+  
+  .hover tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .action-column {
+    width: 250px;
+    text-align: right;
+  }
+  
+  .button-container button {
+    margin-right: 5px;
+  }
+  
+  .tarea-completada {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .tarea-pendiente {
+    color: red;
+    font-weight: bold;
+  }

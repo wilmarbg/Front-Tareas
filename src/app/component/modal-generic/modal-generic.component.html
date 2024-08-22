@@ -1,0 +1,17 @@
+<ng-template #content let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="xlModalLabel">{{textTitle}}</h1>
+            <ng-content select="[buttonclose]"></ng-content>
+        </div>
+        <div class="modal-body dark-modal">
+            <ng-content select="[body]"></ng-content>
+        </div>
+        @if(showFooter){
+            <div class="modal-footer">
+                <ng-content select="[footer]"></ng-content>
+            </div>
+        }
+       
+    </div>
+</ng-template>
