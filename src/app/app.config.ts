@@ -2,7 +2,7 @@ import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { provideCharts, withDefaultRegisterables, } from 'ng2-charts';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(),
     provideCharts(withDefaultRegisterables()),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     {
       provide: DateAdapter,
       useFactory: adapterFactory

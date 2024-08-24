@@ -28,3 +28,8 @@ export const routes: Routes = [
         children: fullRoutes,
     },
 ];
+
+// export const routeConfig = {
+//     routes: routes,
+//     useHash: true
+// };
